@@ -5,10 +5,16 @@ import {Search2Icon} from '@chakra-ui/icons'
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import { useStateValue } from './StateProvider';
 import Home from './Home';
+import auth from './firebase'
 
 
 export default function Navbar() {
-  const [{basket}]=useStateValue();
+  const [{basket,user}]=useStateValue();
+  const login=()=>{
+    if(user){
+      auth.signOut()
+    }
+  }
   return (
     <>
     <nav className='navbar'>
@@ -23,10 +29,10 @@ export default function Navbar() {
       </div>
 
       <div className='header_nav'>
-        <Link to='./login' className='header_link'>
-          <div className='header_option'>
-            <span className='option1'>hello</span>
-            <span className='option2'>signin</span>
+        <Link to={!user &&'./login'} className='header_link'>
+          <div onClick={login} className='header_option'>
+            <span className='option1'>hello{user?.email}</span>
+            <span className='option2'>{user?'sign out':'Sign in'}</span>
           </div>
         </Link>
         <Link to='./Contact' className='header_link'>

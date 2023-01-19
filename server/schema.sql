@@ -16,5 +16,6 @@ CREATE TABLE IF NOT EXISTS Orders(
     totalprice varchar(100) NOT NULL ,
     ProductID int,
     PRIMARY KEY(OrderID),
-    FOREIGN KEY (ProductID) REFERENCES products(ProductID)
+    FOREIGN KEY (Product_ID) REFERENCES products(Product_ID)
+
 );

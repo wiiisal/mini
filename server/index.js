@@ -9,6 +9,8 @@ const{routerMail2}=require("./router/routersuccessmail")
 const{routerpostproduct}=require("./router/routerpost")
 const{routerUpdate}=require("./router/routerupdateproduct")
 const{routerpayment}=require("./router/routerpayment")
+const{routerdelete}=require("./router/routerdelete")
+const{routerpostorder}=require("./router/routerOrders")
 app.use(
     cors({
         origin:"http://localhost:3000",
@@ -23,6 +25,8 @@ app.use("/",routerUpdate)
 app.use("/",routerMail)
 app.use("/",routerMail2)
 app.use("/",routerpayment)
+app.use("/",routerdelete)
+app.use("/",routerpostorder)
 app.listen(port,()=>{
     console.log("http://localhost:"+port)
 })

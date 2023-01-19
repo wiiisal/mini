@@ -7,6 +7,10 @@ export const initialState={
     
     console.log(action)
     switch(action.type){
+        case"SET_USER":
+        return{
+            ...state,user:action.user
+        }
         case 'add_to_basket':
             return{...state,
                 basket:[...state.basket,action.product]

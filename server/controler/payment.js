@@ -9,11 +9,11 @@ const session = await stripe.checkout.sessions.create({
       price_data: { 
         currency: "inr", 
         product_data: { 
-          name: product.name, 
+          name:'IPHONE 14 Pro', 
         }, 
-        unit_amount: product.price * 100, 
+        unit_amount: 3019 * 100, 
       }, 
-      quantity: product.quantity, 
+      quantity: 5, 
     }, 
   ], 
   mode: "payment", 

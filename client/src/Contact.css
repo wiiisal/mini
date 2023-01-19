@@ -1,16 +1,7 @@
-.mailform{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.mailform{margin-left: 200px;
+    margin-right: 200px;
     margin-top: 100px;
-    margin-left: 150px;
-    margin-right: 150px;
-    text-decoration:underline;
-    font-size: larger;
-    background-color: rgb(67, 156, 127);
-    padding-top: 100px;
-    padding-bottom: 100px;
-}
-.contactmessage{
-    color: rgb(33, 209, 27);
+    margin-bottom: 50px;
+    
+    
 }

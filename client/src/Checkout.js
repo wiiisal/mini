@@ -1,11 +1,10 @@
 import React from 'react'
-import { useStateValue } from './StateProvider'
+import StripePayment from './StripePayment'
 
 export default function Checkout() {
-    const[{basket}]=useStateValue()
   return (
     <div className='checkout'>
-      
+      <StripePayment/>
     </div>
   )
 }

@@ -1,35 +1,75 @@
-import React from 'react';
-import {
-    FormControl,
-    FormLabel,
-    FormHelperText,Input
-  } from '@chakra-ui/react';
+import React,{useState} from 'react';
+import { useNavigate } from 'react-router';
 import './Contact.css'
+import axios from 'axios';
+
 
 export default function Contact() {
+  const navigate=useNavigate()
+  const [formStatus, setFormStatus] = useState('Send')
+  const [mailerState, setMailerState] = useState({
+    Name: "",
+    Email: "",
+    Subject:"",
+    Message: "",
+  });
+  const onSubmit = (e) => {
+    e.preventDefault()
+    const response =  fetch("http://localhost:3002/api/sendmail", {
+      method: "POST",
+      body: JSON.stringify({ mailerState }),
+    })
+      .then((res) => res.json())
+      // .then(() => {
+      //   setMailerState({
+      //     Email: "",
+      //     Name: "",
+      //     Subject:"",
+      //     Message: "",
+      //   });
+      // });
+      // navigate('/Success')
+   }
+
+   const handleStateChange=(e)=>{
+    setMailerState((prevState) => ({
+      ...prevState,
+      [e.target.id]: e.target.value,
+    }));
+  }
+
   return (
     <div className='mailform'>
       
-      <FormControl>
-      <FormLabel>Email address</FormLabel>
-      <Input type='email' />
-      <FormHelperText className='contactmessage'>We'll never share your email.</FormHelperText>
-      </FormControl>
-      <FormControl>
-      <FormLabel>FullName</FormLabel>
-      <Input type='FullName' />
-      <FormHelperText></FormHelperText>
-      </FormControl>
-      <FormControl>
-      <FormLabel>Subject</FormLabel>
-      <Input type='Subject' />
-      <FormHelperText></FormHelperText>
-      </FormControl>
-      <FormControl>
-      <FormLabel>Message</FormLabel>
-      <Input type='Message' />
-      <FormHelperText className='contactmessage'>Soon you will get a response.</FormHelperText>
-      </FormControl>
+      <form onClick={onSubmit}>
+        <div className="mb-3">
+          <label className="form-label" htmlFor="name">
+            Name:
+          </label>
+          <input className="form-control" type="text" id="Name" required onChange={handleStateChange} value={mailerState.Name}/>
+        </div>
+        <div className="mb-3">
+          <label className="form-label" htmlFor="email">
+            Email:
+          </label>
+          <input className="form-control" type="email" id="Email" required onChange={handleStateChange} value={mailerState.Email} />
+        </div>
+        <div className="mb-3">
+          <label className="form-label" htmlFor="subject">
+            Subject:
+          </label>
+          <input className="form-control" type="text" id="Subject" required onChange={handleStateChange} value={mailerState.Subject}/>
+        </div>
+        <div className="mb-3">
+          <label className="form-label" htmlFor="message">
+            Message:
+          </label>
+          <textarea className="form-control" id="Message" required onChange={handleStateChange} value={mailerState.Message} />
+        </div>
+        <button className="btn btn-danger" type="submit" onClick={onSubmit}>
+        {formStatus}
+        </button>
+      </form>
 
     </div>
   )
